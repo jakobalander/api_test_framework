@@ -10,7 +10,7 @@ class SimpleApiTests(unittest.TestCase):
         connection = httplib.HTTPSConnection("api.github.com")
         connection.request("GET", "/users/jakobalander/repos", None, headers)
         response = connection.getresponse()
-        cls.data = json.dumps(response.read())
+        cls.data = json.loads(response.read())
 
     def setUp(self):
         pass
@@ -18,5 +18,10 @@ class SimpleApiTests(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_1(self):
-        self.assertTrue(True)
+    def test_correct_full_repo_name(self):
+        thisRepo = None
+        for entry in self.data:
+            if entry["name"] == "api_test_framework":
+                thisRepo = entry
+                break
+        self.assertEquals(entry["full_name"], "jakobadlander/api_test_framework")
