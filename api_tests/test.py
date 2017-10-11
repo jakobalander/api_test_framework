@@ -19,9 +19,7 @@ class SimpleApiTests(unittest.TestCase):
         pass
 
     def test_correct_full_repo_name(self):
-        thisRepo = None
         for entry in self.data:
             if entry["name"] == "api_test_framework":
-                thisRepo = entry
                 break
-        self.assertEquals(entry["full_name"], "jakobadlander/api_test_framework")
+        self.assertEquals(entry["full_name"], "jakobalander/api_test_framework")
